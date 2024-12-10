@@ -8,6 +8,9 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+    },
     module: {
         rules: [
             {
@@ -16,9 +19,18 @@ module.exports = {
                 loader: "babel-loader"
             },
             {
-                test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-        }
+                test: /\.s?css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            api: "modern-compiler"
+                        }
+                    }
+                ]
+            }
         ]
     },
     plugins: [
@@ -33,11 +45,12 @@ module.exports = {
             verbose: true,
             // Automatically remove all unused webpack assets on rebuild
             cleanStaleWebpackAssets: true,
-            protectWebpackAssets: false
+            protectWebpackAssets: false,
+            cleanOnceBeforeBuildPatterns: [path.join(__dirname, 'dist/**/*')],
         })
     ],
     devServer: {
-        port: 3000,
+        port: 7357,
         allowedHosts: 'all'
     }
 }
