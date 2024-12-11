@@ -1,47 +1,46 @@
 // Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
+import { checkUrl } from "./urlChecker";
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
-const serverURL = `https://localhost:9000/api`
-
-const form = document.getElementById('urlForm');
-form.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault();
 
     // Get the URL from the input field
-    const formURL = document.getElementById('name').value;
-
-    // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formURL);
+    const formURL = document.querySelector("#url").value;
 
     // Check if the URL is valid
-    if (URL.canParse(formURL)) {
-        postURL(formURL)
-            .catch(error => console.error("error in sending url", error))
-        ;
+    if (checkUrl(formURL)) {
+        try {
+            await postUrl(formURL);
+        } catch (error) {
+            console.error("error in sending url", error)
+        }
+    } else {
+        console.error(`URL is invalid`);
     }
-
-        // If the URL is valid, send it to the server using the serverURL constant above
-
-
 }
 
 // Function to send data to the server
-const postURL = async (url) => {
-    const res = await fetch(serverURL, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'applications/json'
-        },
-        body: JSON.stringify(data),
-    });
+const postUrl = async (url) => {
+    try {
+        const response = await fetch('/api', {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ url }),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
 
-}
+    } catch (error) {
+        console.error(`Error sending URL:`, error);
+        throw error;
+    }
+};
 
 // Export the handleSubmit function
 export { handleSubmit };
-

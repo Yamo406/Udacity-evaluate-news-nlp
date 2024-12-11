@@ -51,6 +51,12 @@ module.exports = {
     ],
     devServer: {
         port: 7357,
-        allowedHosts: 'all'
+        allowedHosts: 'all',
+        proxy: [
+            {
+                context: ['/api'],
+                target: 'http://localhost:7357',
+            },
+        ],
     }
 }
