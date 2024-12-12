@@ -1,0 +1,7 @@
+@use 'base';
+footer{
+    background-color: base.$accent-color;
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+}

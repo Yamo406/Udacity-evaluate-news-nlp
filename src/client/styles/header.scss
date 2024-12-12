@@ -1,4 +1,6 @@
+@use 'base';
 header {
+    background-color: base.$accent-color;
     display: flex;
     justify-content: space-between;
     padding: 10px 40px;

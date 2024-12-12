@@ -1,12 +1,67 @@
+@use 'base';
+
 form {
-    border: 1px solid #545454;
-    border-radius: 3px;
+    background-color: base.$accent-color;
+    border: 1px solid base.$color;
+    border-radius: 12px;
     padding: 40px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+
+    button{
+        text-decoration: none;
+        border: none;
+        border: 1px solid base.$color;
+        cursor: pointer;
+        padding: 16px;
+        border-radius: 12px;
+        background-color: base.$background-color;
+        color: base.$color;
+        font-size: 14px;
+        font-weight: bold;
+        transition-duration: 0.4s;
+
+        &:hover{
+            text-decoration: none;
+            background-color: base.$accent-color;
+            color: base.$color;
+        }
+    }
 }
 
 input {
-    padding: 5px 20px;
+    background-color: base.$background-color;
+    color: base.$color;
+    border-radius: 12px;
+    border: none;
+    border: 1px solid base.$color;
+    padding: 10px 20px;
     width: 100%;
     line-height: 16px;
     margin: 10px 0;
+}
+
+#form-headline{
+    text-align: center;
+}
+#form-results{
+    background-color: base.$accent-color;
+    border-radius: 12px;
+    border: 1px solid base.$color;
+    padding: 12px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+}
+
+.result{
+    background-color: base.$background-color;
+    color: base.$color;
+    padding: 8px;
+    gap: 8px;
+    font-size: 14px;
+    border-radius: 12px;
 }
