@@ -36,10 +36,14 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
+            title: 'Offline NLP',
             template: "./src/client/views/index.html",
             filename: "./index.html",
         }),
-        new WorkboxPlugin.GenerateSW(),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
+        }),
         new MiniCssExtractPlugin(),
 
     ],

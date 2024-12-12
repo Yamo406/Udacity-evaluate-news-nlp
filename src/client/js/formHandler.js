@@ -1,4 +1,3 @@
-// Replace checkForName with a function that checks the URL
 import { checkUrl } from "./urlChecker";
 
 async function handleSubmit(event) {
